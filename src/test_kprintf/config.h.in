@@ -1,0 +1,13 @@
+// SPDX-FileCopyrightText: 2022 Linblow <dev@linblow.com>
+// SPDX-License-Identifier: BSD-3-Clause
+#ifndef TEST_KPRINTF_CONFIG_H
+#define TEST_KPRINTF_CONFIG_H
+
+#define MOD_NAME                    "@PROJECT_NAME@"
+#define MOD_VER                     "@PROJECT_VERSION@"
+#define MOD_VER_MAJOR               @PROJECT_VERSION_MAJOR@
+#define MOD_VER_MINOR               @PROJECT_VERSION_MINOR@
+#define MOD_VER_PATCH               @PROJECT_VERSION_PATCH@
+#define MOD_VER_TWEAK               @PROJECT_VERSION_TWEAK@
+
+#endif /* TEST_KPRINTF_CONFIG_H */

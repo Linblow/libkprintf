@@ -1,0 +1,13 @@
+// SPDX-FileCopyrightText: 2022 Linblow <dev@linblow.com>
+// SPDX-License-Identifier: BSD-3-Clause
+#ifndef TEST_TINY_PRINTF_CONFIG_H
+#define TEST_TINY_PRINTF_CONFIG_H
+
+#define APP_NAME         "@PROJECT_NAME@"
+#define APP_VER          "@PROJECT_VERSION@"
+#define APP_VER_MAJOR    @PROJECT_VERSION_MAJOR@
+#define APP_VER_MINOR    @PROJECT_VERSION_MINOR@
+#define APP_VER_PATCH    @PROJECT_VERSION_PATCH@
+#define APP_VER_TWEAK    @PROJECT_VERSION_TWEAK@
+
+#endif /* TEST_TINY_PRINTF_CONFIG_H */

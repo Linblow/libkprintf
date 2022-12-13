@@ -1,0 +1,49 @@
+PSP_BEGIN_EXPORTS
+
+PSP_EXPORT_START(syslib, 0, 0x8000)
+PSP_EXPORT_FUNC(module_start)
+PSP_EXPORT_FUNC(module_stop)
+PSP_EXPORT_FUNC(module_reboot_before)
+PSP_EXPORT_VAR(module_info)
+PSP_EXPORT_VAR(module_sdk_version)
+# PSP_EXPORT_VAR(module_start_thread_parameter)
+# PSP_EXPORT_VAR(module_stop_thread_parameter)
+PSP_EXPORT_END
+
+PSP_EXPORT_START(KprintfLibrary, 0, 0x4001)
+PSP_EXPORT_FUNC_HASH(kprintf_register_default_handler)
+PSP_EXPORT_FUNC_HASH(kprintf_register_handler)
+PSP_EXPORT_FUNC_HASH(kprintf_unregister_handler)
+PSP_EXPORT_FUNC_HASH(kprintf_install)
+PSP_EXPORT_FUNC_HASH(kprintf_is_started)
+PSP_EXPORT_END
+
+PSP_EXPORT_START(KprintfLibraryForKernel, 0, 0x0001)
+PSP_EXPORT_FUNC_HASH(kprintf_register_default_handler)
+PSP_EXPORT_FUNC_HASH(kprintf_register_handler)
+PSP_EXPORT_FUNC_HASH(kprintf_unregister_handler)
+PSP_EXPORT_FUNC_HASH(kprintf_install)
+PSP_EXPORT_FUNC_HASH(kprintf_is_started)
+PSP_EXPORT_END
+
+# Export these useful functions in a seperate library.
+# Note these are already re-entrant and thread-safe.
+PSP_EXPORT_START(KprintfLibc, 0, 0x4001)
+PSP_EXPORT_FUNC_HASH(printf)
+PSP_EXPORT_FUNC_HASH(sprintf)
+PSP_EXPORT_FUNC_HASH(snprintf)
+PSP_EXPORT_FUNC_HASH(vprintf)
+PSP_EXPORT_FUNC_HASH(vsprintf)
+PSP_EXPORT_FUNC_HASH(vsnprintf)
+PSP_EXPORT_END
+
+PSP_EXPORT_START(KprintfLibcForKernel, 0, 0x0001)
+PSP_EXPORT_FUNC_HASH(printf)
+PSP_EXPORT_FUNC_HASH(sprintf)
+PSP_EXPORT_FUNC_HASH(snprintf)
+PSP_EXPORT_FUNC_HASH(vprintf)
+PSP_EXPORT_FUNC_HASH(vsprintf)
+PSP_EXPORT_FUNC_HASH(vsnprintf)
+PSP_EXPORT_END
+
+PSP_END_EXPORTS

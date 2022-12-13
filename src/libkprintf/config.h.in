@@ -1,0 +1,27 @@
+// SPDX-FileCopyrightText: 2022 Linblow <dev@linblow.com>
+// SPDX-License-Identifier: BSD-3-Clause
+#ifndef LIBKPRINTF_CONFIG_H
+#define LIBKPRINTF_CONFIG_H
+
+#define MOD_NAME                            "@PROJECT_NAME@"
+#define MOD_VER                             "@PROJECT_VERSION@"
+#define MOD_VER_MAJOR                       @PROJECT_VERSION_MAJOR@
+#define MOD_VER_MINOR                       @PROJECT_VERSION_MINOR@
+#define MOD_VER_PATCH                       @PROJECT_VERSION_PATCH@
+#define MOD_VER_TWEAK                       @PROJECT_VERSION_TWEAK@
+
+#define KPRINTF_BUFSZ                       @KPRINTF_BUFSZ@
+#define KPRINTF_MAX_HANDLERS                @KPRINTF_MAX_HANDLERS@
+
+#define KPRINTF_MSG_VPLSIZE_KIB             @KPRINTF_MSG_VPLSIZE_KIB@
+#define KPRINTF_EV_THREAD_PRIORITY          @KPRINTF_EV_THREAD_PRIORITY@
+#define KPRINTF_EV_THREAD_STACKSIZE_KIB     @KPRINTF_EV_THREAD_STACKSIZE_KIB@
+#define KPRINTF_PSPLINK_DETECT_TIMEOUT      @KPRINTF_PSPLINK_DETECT_TIMEOUT@
+#define KPRINTF_PSPLINK_USB_DELAY           @KPRINTF_PSPLINK_USB_DELAY@
+
+#cmakedefine01 KPRINTF_DH_AUTO_REGISTER
+#cmakedefine01 KPRINTF_DH_AUTO_NEWLINE
+#cmakedefine01 KPRINTF_DH_WRITE_KPRINTF
+#cmakedefine01 KPRINTF_DH_WRITE_PRINTF
+
+#endif /* LIBKPRINTF_CONFIG_H */
