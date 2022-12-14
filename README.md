@@ -6,19 +6,19 @@ The PSP kernel provides two functions for printing debug output:
 1. `Kprintf` (kernel mode) is typically used by firmware modules
 2. `sceKernelPrintf` (user mode) is used by game applications
 
-They don't do anything by themselves. To catch the messages, a kernel handler must be registered.  
-That's what this library plugin is for. It enables and registers an internal kernel handler.  
-This internal handler formats the message, adds it to the messages queue, and raises an event.  
-The internal event thread will then wake up, and flush the message(s) in the queue.  
+They don't do anything by themselves. To catch the messages, a kernel handler must be registered. 
+That's what this library plugin is for. It enables and registers an internal kernel handler.
+This internal handler formats the message, adds it to the messages queue, and raises an event.
+The internal event thread will then wake up, and flush the message(s) in the queue.
 Each user sub-handler will be invoked for each formatted message.
 
-A default sub-handler is registered on startup.  
-It will print all caught messages to kernel's stdout.  
+A default sub-handler is registered on startup. 
+It will print all caught messages to kernel's stdout.
 This is sufficient 99% of the time.
 
-The `libkprintf` library should work anywhere (GAME/VSH).  
-It cannot be used to dump messages too early in the bootchain (e.g `sysmem.prx`).  
-The functions which the library depends on are loaded later in the bootchain. 
+The `libkprintf` library should work anywhere (GAME/VSH).
+It cannot be used to dump messages too early in the bootchain (e.g `sysmem.prx`).
+The functions which the library depends on are loaded later in the bootchain.
 
 ## Features
 
@@ -42,16 +42,16 @@ If your program resides in user memory, link to the user mode one(s), otherwise 
 
 ### API KprintfLibrary
 
-- `kprintf_register_default_handler`
+- `kprintf_register_default_handler`  
    Register the default handler that prints all messages to stdout.  
    By default, it is automatically registered on startup.  
    You can disable the automatic registration by [changing the parameters](src/config.cmake).
-- `kprintf_register_handler`
+- `kprintf_register_handler`  
    Register a custom handler.  
    By default, up to 6 handlers can be registered (including the default one).
-- `kprintf_unregister_handler`
+- `kprintf_unregister_handler`  
    Unregister a custom or the default handler.  
-- `kprintf_install`
+- `kprintf_install`  
    Re-register the internal `Kprintf` handler in case it was over-registered.
 
 You can also [adjust the max number of handlers, Kprintf buffer size, etc](src/config.cmake).
@@ -124,12 +124,12 @@ You need a PSP that runs a 6.60 or 6.61 custom firmware.
 Add the following line to either one of `GAME.txt` or `VSH.txt` or both:
 `ms0:/usr/local/lib/libkprintf/libkprintf.prx 1`
 
-In order to view the messages through the USB connection, you need [psplink](https://github.com/pspdev/psplinkusb).  
-The `psplink.prx` plugin must be enabled in VSH or GAME or both depending on your needs.  
-You should add psplink in `VSH.txt` / `GAME.txt` before the `libkprintf.prx`'s line.  
+In order to view the messages through the USB connection, you need [psplink](https://github.com/pspdev/psplinkusb).
+The `psplink.prx` plugin must be enabled in VSH or GAME or both depending on your needs.
+You should add psplink in `VSH.txt` / `GAME.txt` before the `libkprintf.prx`'s line.
 On your computer, have both `usbhostfs_pc` and `pspsh` run in seperate terminals.
 
-Make sure plugins are enabled in your CFW settings, and you're good to go!  
+Make sure plugins are enabled in your CFW settings, and you're good to go!
 You should now see all messages in `pspsh` terminal.
 
 ## Credits
