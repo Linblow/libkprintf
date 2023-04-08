@@ -1,3 +1,13 @@
 /.vscode
 /build*
 /dist*
+
+# Unused and unnecessary files we don't want in the public repo
+cmake/_*
+cmake/dist.cmake
+libs/inih
+libs/psp/debug
+libs/slre
+src/loader
+# This one as well since this is a small project
+TODO
