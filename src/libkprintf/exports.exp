@@ -5,9 +5,6 @@ PSP_EXPORT_FUNC(module_start)
 PSP_EXPORT_FUNC(module_stop)
 PSP_EXPORT_FUNC(module_reboot_before)
 PSP_EXPORT_VAR(module_info)
-PSP_EXPORT_VAR(module_sdk_version)
-# PSP_EXPORT_VAR(module_start_thread_parameter)
-# PSP_EXPORT_VAR(module_stop_thread_parameter)
 PSP_EXPORT_END
 
 PSP_EXPORT_START(KprintfLibrary, 0, 0x4001)

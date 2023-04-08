@@ -36,7 +36,7 @@ include(psp-build-stub)
 
 project(
   psp_kprintf_project
-  VERSION 1.0.0 LANGUAGES C ASM
+  VERSION 1.0.1 LANGUAGES C ASM
   DESCRIPTION "Sony PSP kprintf kernel library")
 
 set(STUBS_DIR "${CMAKE_CURRENT_LIST_DIR}/sdk/stubs")

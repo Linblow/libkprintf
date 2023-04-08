@@ -11,7 +11,6 @@ int _main(SceSize args, void *argp)
     i = 0;
     while (1)
     {
-        // Kprintf("Hello %s %d from Kprintf!", username, ++i);
         Kprintf("Hello %s %d from Kprintf!\n", username, ++i);
         sceKernelDelayThread(1*1000*1000);
     }
