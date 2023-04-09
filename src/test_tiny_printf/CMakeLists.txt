@@ -7,7 +7,7 @@ set(MAKE_PSP_OFW_APP OFF)
 project(
   test_tiny_printf
   VERSION 1.0.0 LANGUAGES C
-  DESCRIPTION "libkprintf's printf test")
+  DESCRIPTION "libkprintf printf test")
 
 # App title as seen in the XMB.
 set(PARAM_TITLE "${PROJECT_DESCRIPTION} v${PROJECT_VERSION}")
