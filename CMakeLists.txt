@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2022 Linblow <dev@linblow.com>
 # SPDX-License-Identifier: BSD-3-Clause
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.23)
 
 if (NOT CMAKE_TOOLCHAIN_FILE)
   set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/cmake/psp-toolchain.cmake)
