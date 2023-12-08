@@ -78,7 +78,6 @@ extern "C" {
    and are therefore "compatible" with uOFW's. */
 #include <pspdisplay.h>
 #include <pspdisplay_kernel.h>
-#include <psprtc.h>
 #include <pspopenpsid.h>
 
 /* Missing defintions in both uOFW and pspsdk: */
