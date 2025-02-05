@@ -1,20 +1,31 @@
 # PSP Kprintf library
 
-`libkprintf` is a kernel module library for the Sony PSP.
+`libkprintf` is a kernel plugin/library for the Sony PSP.
 
-The PSP kernel provides two functions for printing debug output:
-1. `Kprintf` (kernel mode) is typically used by firmware modules
-2. `sceKernelPrintf` (user mode) is used by game applications
+The PSP kernel API from sysmem provides two functions for printing debug output:
+1. [`Kprintf`](https://github.com/uofw/uofw/blob/85b85a19dd8fe5cc69e48d44cf9556ec8ede0628/src/kd/sysmem/kdebug.c#L672) is for kernel mode (firmware module, kernel plugins, etc)
+2. [`sceKernelPrintf`](https://github.com/uofw/uofw/blob/85b85a19dd8fe5cc69e48d44cf9556ec8ede0628/src/kd/sysmem/kdebug.c#L652) is for user mode (game applications)
 
-They don't do anything by themselves. To catch the messages, a kernel handler must be registered.  
-That's what this library plugin is for. It enables and registers an internal kernel handler.  
-This internal handler formats the message, adds it to the messages queue, and raises an event.  
-The internal event thread will then wake up, and flush the message(s) in the queue.  
-Each user sub-handler will be invoked for each formatted message.
+They basically suspend all interrupts, call the registered kernel handler, and resume interrupts.  
+The logic to catch messages from both functions **must** be implemented in *the* registered kernel handler.  
+This is where this plugin/library is for. It enables and registers a kernel handler for you.  
+Whenever either one of `Kprintf` or `sceKernelPrintf` is called, the [library's registered kernel handler](https://github.com/Linblow/libkprintf/blob/1927e458a7a0cd7ada20aab98f45dc7cfa614a1e/src/libkprintf/handler.c#L165) is run:
+- It formats the incoming message with our own `vsnprintf` (no external dependency)
+- It adds the formatted message to the messages queue
+- It sends a "flush" event to the library's internal events thread for processing
 
-A default sub-handler is registered on startup.  
-It will print all caught messages to kernel's stdout.  
-This is sufficient 99% of the time.
+Note the registered kernel handler is always called in interrupts-disabled state.  
+Hence the necessity to add formatted messages to a queue for processing in a interrupts-enabled thread.
+
+The [internal event thread](src/libkprintf/event.c) (interrupts-enabled) will wake up whenever it receives a "flush" event.  
+It will then call each registered sub-handler for each formatted message (and remove the message).  
+Once flushed, the event thread goes back to its waiting state.
+
+Additionally, the library provides an [API](src/libkprintf/kprintf.h) to register multiple sub-handlers as only one kernel handler can be registered.  
+The library **registers a default sub-handler on startup** which is sufficient in most cases.  
+It will print a formatted message to kernel's stdout (as returned by `sceKernelStdout()`).  
+Coupled with [psplink](https://github.com/pspdev/psplinkusb), you can see all messages in pspsh's terminal through USB (see below).  
+Otherwise, you can register our own sub-handler(s) via the provided [API](src/libkprintf/kprintf.h) from kernel or user mode.
 
 The `libkprintf` library should work anywhere (GAME/VSH).  
 It cannot be used to dump messages too early in the bootchain (e.g `sysmem.prx`).  
@@ -121,7 +132,7 @@ For development, you will also find these files in `$PSPDEV/psp` (e.g `/usr/loca
 
 You need a PSP that runs a 6.60 or 6.61 custom firmware.
 
-Add the following line to either one of `GAME.txt` or `VSH.txt` or both:
+Add the following line to either one of `GAME.txt` or `VSH.txt` or both:  
 `ms0:/usr/local/lib/libkprintf/libkprintf.prx 1`
 
 In order to view the messages through the USB connection, you need [psplink](https://github.com/pspdev/psplinkusb).  
